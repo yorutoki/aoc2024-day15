@@ -272,7 +272,9 @@ $(function () {
         }
         break;
       case 13:
-        $('.messagewrapper').append(message.clone())
+        newmsg = message.clone()
+        $('.messagewrapper').append(newmsg)
+        setTimeout(()=>{newmsg.remove()}, 3000)
         panel.animate({bottom: '0'}, 500)
         manual = true
         break;
@@ -378,11 +380,18 @@ function row5() {
 
     }
     if (newY == 5) {
-      if (arrw % 2 == 1 && map2[newY][newX] == '#' && steps == 1) {
+      if (arrw  == 1 && map2[newY][newX] == '#' && steps == 1) {
       map2[robot[0]][robot[1]] = ".";
       map2[newY][newX] = '@'
       robot = [newY, newX];
       yup = false
+      }
+      if (pushing == true && arrw == 1 && /[ #]/.test(map2[newY][newX])) {
+        temp = map2[newY].join('')
+        temp = temp.replace(/@([\[\]]+)[ #]/, ' @$1')
+        map2[newY] = temp.split('')
+        robot = [newY, robot[1] + d[1]]
+        yup = false
       }
     }
   }
@@ -391,14 +400,6 @@ function row5() {
     map2[newY][newX] = "@";
     robot = [newY, newX];
     yup = false;
-  }
-
-  if (pushing == true && arrw == 1 && /[ #]/.test(map2[newY][newX])) {
-    temp = map2[newY].join('')
-    temp = temp.replace(/@([\[\]]+)[ #]/, ' @$1')
-    map2[newY] = temp.split('')
-    robot = [newY, robot[1] + d[1]]
-    yup = false
   }
 }
 
@@ -419,15 +420,16 @@ function doFire() {
   }
   if (map2[newY][newX] == '@') {
     manual = false
-    newY++
-    map2[newY - 1][newX] = ' '
-    if (newY < map2.length - 1) {
+    newnewY = newY + 1
+    map2[newY][newX] = ' '
+    if (newnewY < map2.length - 1) {
+      newY = newnewY
+      console.log(newY)
       map2[newY][newX] = '@'
     } else {
       clearInterval(fire)
       youwin = $('<div>').addClass('youwin').text('🎉🎉 YOU WIN!! 🎉🎉')
       $('body').append(youwin)
-      boxwin.remove()
     }
   }
   clearBoard()
