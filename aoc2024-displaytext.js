@@ -2,7 +2,7 @@ finaldisplay = ""
 
 function displayText(text) {
     $(function(){   
-        console.log(text)
+        //console.log(text)
 
         if (Array.isArray(text)) {
             text = text.join('<span class="comma">,</span><br>')

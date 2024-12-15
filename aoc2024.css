@@ -218,13 +218,6 @@ button.click {
     padding:30px;
 }
 
-.youwin:first-child {
-    display:none;
-}
-.youwin:last-child {
-    display:block;
-}
-
 @keyframes youwin {
     0% {opacity:0}
     40% {opacity:0}

@@ -431,6 +431,7 @@ function doFire() {
       map2[newY][newX] = '@'
     } else {
       clearInterval(fire)
+      if ($('.youwin').length > 0) {$('.youwin').remove()}
       youwin = $('<div>').addClass('youwin').text('🎉🎉 YOU WIN!! 🎉🎉')
       $('body').append(youwin)
     }
