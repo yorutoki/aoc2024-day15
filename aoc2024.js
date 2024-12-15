@@ -277,6 +277,9 @@ $(function () {
         setTimeout(()=>{newmsg.remove()}, 3000)
         panel.animate({bottom: '0'}, 500)
         manual = true
+        autorunning = false
+        if ($('.autoruntext').length > 0) {autoruntext.remove()}
+        clearInterval(autorun)
         break;
     }
 
